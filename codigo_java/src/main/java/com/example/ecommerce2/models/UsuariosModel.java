@@ -19,6 +19,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.*;
 
 import static net.bytebuddy.dynamic.loading.InjectionClassLoader.*;
@@ -31,7 +34,14 @@ public class UsuariosModel {
     @Column(unique = true, nullable = false)
     private Long id;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name="fecha_registro", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
     private Date fecha_registro;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name="fecha_ultima_actualizacion", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = true)
+    private Date fecha_ultima_actualizacion  = new Date();
+
     private String codigo;
     private String nombres;
     private String apellidos;
@@ -84,4 +94,13 @@ public class UsuariosModel {
     public void setFecha_registro(Date fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
+
+    public Date getFecha_ultima_actualizacion() {
+        return fecha_ultima_actualizacion;
+    }
+
+    public void setFecha_ultima_actualizacion(Date fecha_ultima_actualizacion) {
+        this.fecha_ultima_actualizacion = fecha_ultima_actualizacion;
+    }
+
 }

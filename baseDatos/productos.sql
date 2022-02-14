@@ -2,7 +2,8 @@ CREATE SEQUENCE apl_user1.iseq_productos INCREMENT BY 1 MINVALUE 0 MAXVALUE 9999
 
 CREATE TABLE apl_user1.productos(
 	id NUMBER(18, 0) DEFAULT apl_user1.iseq_productos.nextval,
-	feha_registro DATE DEFAULT SYSDATE,
+	feha_registro  DATE DEFAULT SYSDATE NOT NULL ENABLE,
+	fecha_ultima_actualizacion  DATE DEFAULT SYSDATE NOT NULL ENABLE,
 	nombre VARCHAR2(50) NOT NULL,
 	id_estado NUMBER(18,0) NOT NULL,
 	
@@ -12,3 +13,5 @@ CREATE TABLE apl_user1.productos(
 	REFERENCES apl_user1.estados (id) ENABLE
 
 );
+
+insert into apl_user1.productos(id, nombre, id_estado) values(0, 'NO DISPONIBLE', 0);
